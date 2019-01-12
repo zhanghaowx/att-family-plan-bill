@@ -60,6 +60,14 @@
         this.initScrollbar()
         this.initPopover()
         this.initInput()
+
+        chrome.tabs.executeScript({
+          code: '(' + function () {
+            return document.body.innerHTML
+          } + ')();'
+        }, function (results) {
+          console.log(results[0])
+        })
       }
     }
 </script>

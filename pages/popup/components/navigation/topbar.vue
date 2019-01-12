@@ -4,22 +4,22 @@
     <div class="navbar-inner">
         <div class="header-quick-nav">
             <!-- BEGIN TOP NAVIGATION MENU -->
-            <div class="pull-left">
-                <ul class="nav quick-section">
-                    <li class="quicklinks m-r-10">
-                        <a href="#" @click="searchDelayed(query, 0)">
-                            <i class="fa fa-spin material-icons" :class="refreshStyle">refresh</i>
-                        </a>
-                    </li>
-                    <li class="quicklinks">
-                        <span class="h-seperate"></span>
-                    </li>
-                    <li class="m-r-10 input-prepend inside search-form no-boarder">
-                        <span class="add-on"><i class="material-icons">search</i></span>
-                        <input type="text" class="no-boarder" style="width:250px;" placeholder="Search ..." v-model="query" autofocus>
-                    </li>
-                </ul>
-            </div>
+            <!--<div class="pull-left">-->
+                <!--<ul class="nav quick-section">-->
+                    <!--<li class="quicklinks m-r-10">-->
+                        <!--<a href="#" @click="searchDelayed(query, 0)">-->
+                            <!--<i class="fa fa-spin material-icons" :class="refreshStyle">refresh</i>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="quicklinks">-->
+                        <!--<span class="h-seperate"></span>-->
+                    <!--</li>-->
+                    <!--<li class="m-r-10 input-prepend inside search-form no-boarder">-->
+                        <!--<span class="add-on"><i class="material-icons">search</i></span>-->
+                        <!--<input type="text" class="no-boarder" style="width:250px;" placeholder="Search ..." v-model="query" autofocus>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
             <div class="pull-right">
                 <ul class="nav quick-section">
                     <li class="quicklinks">

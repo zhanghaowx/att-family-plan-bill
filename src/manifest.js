@@ -30,6 +30,12 @@ module.exports = {
     persistent: true,
     page: 'pages/background.html'
   },
+  content_scripts: [{
+    js: ['js/manifest.js', 'js/vendor.js', 'js/content.js'],
+    matches: [
+      'https://*.att.com/*'
+    ]
+  }],
   options_page: 'pages/options.html',
   content_security_policy: "script-src 'self' 'unsafe-eval' https://cdnjs.cloudflare.com; object-src 'self'",
   web_accessible_resources: [

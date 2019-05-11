@@ -31,7 +31,7 @@ module.exports = {
     page: 'pages/background.html'
   },
   content_scripts: [{
-    js: ['js/manifest.js', 'js/vendor.js', 'js/content.js'],
+    js: ['js/manifest.js', 'js/vendor.js'],
     matches: [
       'https://*.att.com/*'
     ]

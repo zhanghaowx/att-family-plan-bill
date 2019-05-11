@@ -103,10 +103,10 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: path.join(page('./inject'), 'inject.js'), to: 'js'
     }]),
-    // new ChromeReloadPlugin({
-    //   port: 9090,
-    //   manifest: path.join(__dirname, '..', 'src', 'manifest.js')
-    // }),
+    new ChromeReloadPlugin({
+      port: 9090,
+      manifest: path.join(__dirname, '..', 'src', 'manifest.js')
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module) {

@@ -1,7 +1,7 @@
 // bill will be save in the following structure
 monthlyBill = {
   month: "",
-  totalCharge: 0,
+  planCharge: 0,
   users: {}
 }
 
@@ -39,7 +39,7 @@ ParserAPIv1 = {
     html.querySelector(selectorApi.wirelessBill)
       .querySelectorAll(selectorApi.wirelessBillPerPerson)
       .forEach(fullBill => {
-        let isMonthlyTotal = (monthlyBill.totalCharge === 0)
+        let isMonthlyTotal = (monthlyBill.planCharge === 0)
         for (let i = 0; i < this.chargeTitles.length; i++) {
           const name = fullBill.querySelector(selectorApi.name).innerText
 
@@ -52,7 +52,7 @@ ParserAPIv1 = {
 
           if (isMonthlyTotal) {
             monthlyBill.month = chargeTitle
-            monthlyBill.totalCharge = chargeFee
+            monthlyBill.planCharge = chargeFee
             isMonthlyTotal = false
           } else {
             if (monthlyBill.users[name] == null)

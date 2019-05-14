@@ -1,17 +1,13 @@
-import Configuration from 'src/configuration/configuration.js'
+import Bills from 'src/bills/bills.js'
 
 export default class App {
   constructor () {
-    this.configuration = new Configuration()
-  }
-
-  install () {
-    this.configuration.install()
+    this.bills = new Bills()
   }
 
   run () {
-    return this.configuration.load().then(config => {
-      return config
+    return this.bills.load().then(data => {
+      return data
     })
   }
 }

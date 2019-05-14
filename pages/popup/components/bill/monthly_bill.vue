@@ -18,11 +18,8 @@
           <div class="grid-body no-border">
             <!-- BEGIN CONTENT TITLE -->
             <h3>
-              Recent
-              <span class="semi-bold">Bill</span>
+              <span class>{{bill.month}}</span>
             </h3>
-            <p>{{result.month}}</p>
-            <br>
             <!-- END CONTENT TITLE -->
             <table class="table no-more-tables">
               <thead>
@@ -32,36 +29,32 @@
                   <th v-for="column in columns">
                     <span>{{column | trunc}}</span>
                   </th>
-                  <th>Total</th>
+                  <th>Adjusted</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(userBill, user) in result.users">
+                <tr v-for="(userBill, user) in bill.users">
                   <td class="v-align-middle">{{user}}</td>
                   <td class="v-align-middle">
-                    <span class="muted">{{result.monthBase}}</span>
+                    <span class="muted">{{bill.monthBase}}</span>
                   </td>
                   <td class="v-align-middle" v-for="column in columns">
                     <span class="muted">{{userBill[column]}}</span>
                   </td>
-                  <td class="v-align-middle">{{userBill.total}}</td>
+                  <td class="v-align-middle"></td>
                 </tr>
                 <tr>
                   <td class="v-align-middle">Plan Charge</td>
                   <td class="v-align-middle">
-                    <span class="muted">{{result.planCharge}}</span>
+                    <span class="muted">{{bill.planCharge}}</span>
                   </td>
                   <td class="v-align-middle" v-for="column in columns">
                     <span class="muted"></span>
                   </td>
-                  <td class="v-align-middle">{{result.monthTotal}}</td>
+                  <td class="v-align-middle">{{bill.monthTotal}}</td>
                 </tr>
               </tbody>
             </table>
-            <button type="button" class="btn btn-success btn-cons pull-right">
-              <i class="fa fa-cloud-upload"></i>
-              <span class="bold">Upload</span>
-            </button>
           </div>
         </div>
       </div>
@@ -75,11 +68,10 @@
 <script>
 import Search from "../../mixins/search.vue";
 import Indicator from "../../mixins/indicator.vue";
-import { app } from "src/app/app.js";
 export default {
+  props: ["bill"],
   data: function() {
     return {
-      result: {},
       columns: {}
     };
   },
@@ -93,54 +85,20 @@ export default {
     }
   },
   methods: {
-    readBill() {
-      chrome.tabs.executeScript(
-        {
-          file: "js/inject.js"
-        },
-        results => {
-          this.result = results[0];
-          this.createColumns();
-          this.calcMonthBase();
-          this.calcTotals();
-        }
-      );
-    },
     createColumns() {
       let columns = new Set();
 
-      for (let username in this.result.users) {
-        Object.keys(this.result.users[username]).forEach(column => {
+      for (let username in this.bill.users) {
+        Object.keys(this.bill.users[username]).forEach(column => {
           columns.add(column);
         });
       }
 
-      this.columns = columns;
-    },
-    calcTotals() {
-      let monthTotal = Number(this.result.planCharge.replace(/[^0-9.-]+/g, ""));
-      for (let username in this.result.users) {
-        let userTotal = 0;
-
-        Object.keys(this.result.users[username]).forEach(chargeItem => {
-          const chargeAmount = this.result.users[username][chargeItem];
-          userTotal += Number(chargeAmount.replace(/[^0-9.-]+/g, ""));
-        });
-
-        this.result.users[username].total = `$${userTotal.toFixed(2)}`;
-        monthTotal += userTotal;
-      }
-      this.result.monthTotal = `$${monthTotal.toFixed(2)}`;
-    },
-    calcMonthBase() {
-      this.result.monthBase =
-        Number(this.result.planCharge.replace(/[^0-9.-]+/g, "")) /
-        Object.keys(this.result.users).length;
-      this.result.monthBase = `$${this.result.monthBase.toFixed(2)}`;
+      this.columns = Array.from(columns);
     }
   },
   mounted() {
-    this.readBill();
+    this.createColumns();
   }
 };
 </script>

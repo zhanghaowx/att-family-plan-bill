@@ -36,7 +36,6 @@ module.exports = {
       'https://*.att.com/*'
     ]
   }],
-  options_page: 'pages/options.html',
   content_security_policy: "script-src 'self' 'unsafe-eval' https://cdnjs.cloudflare.com; object-src 'self'",
   web_accessible_resources: [
     'js/*.js'

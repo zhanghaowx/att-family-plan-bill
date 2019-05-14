@@ -21,19 +21,7 @@ Vue.mixin({
   }
 })
 
-function getConfig () {
-  return app.run()
-}
-
-function getTabUrl () {
-  return new Promise(resolve => {
-    chrome.tabs.getSelected(null, function (tab) {
-      resolve(tab.url)
-    })
-  })
-}
-
-Promise.all([getTabUrl(), getConfig()]).then(values => {
+app.run().then(() => {
   /* eslint-disable no-new */
   new Vue({
     el: '#root',

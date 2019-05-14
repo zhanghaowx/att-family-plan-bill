@@ -1,6 +1,4 @@
-import defaults from 'src/configuration/defaults.js'
-
-export default class Configuration {
+export default class Bills {
   /**
    * Creates a helper class to storage data into google chrome's storage
    * @param delay delay in milliseconds before saving
@@ -12,7 +10,7 @@ export default class Configuration {
   }
 
   /**
-   * Save configurations with chrome's cloud storage
+   * Save Billss with chrome's cloud storage
    * @returns {Promise<any>}
    */
   save () {
@@ -28,7 +26,7 @@ export default class Configuration {
   }
 
   /**
-   * Read configurations with chrome's cloud storage
+   * Read Billss with chrome's cloud storage
    * @returns {Promise<any>}
    */
   load () {
@@ -36,19 +34,6 @@ export default class Configuration {
       chrome.storage.local.get(null, result => {
         this.data = result
         resolve(result)
-      })
-    })
-  }
-
-  /**
-   * Save default params during extension installation
-   */
-  install () {
-    this.data = defaults
-    return new Promise(resolve => {
-      chrome.runtime.onInstalled.addListener(function () {
-        chrome.storage.local.set(defaults)
-        resolve()
       })
     })
   }

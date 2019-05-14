@@ -13,7 +13,6 @@ let resolve = dir => path.join(__dirname, '..', 'src', dir)
 module.exports = {
   entry: {
     popup: page('./popup'),
-    options: page('./options'),
     background: page('./background')
   },
   output: {
